@@ -1,52 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-      <meta charset="UTF-8">
-      <meta name="viewport"           content="width=device-width, initial-scale=1.0">
-      <title>Sign Up Page</title>
-      <style>
-         body {
-             margin-top: 120px;
-             color: white;
-             background-image: url('https://img.freepik.com/premium-vector/abstract-futuristic-purple-background-with-shiny-lines_23-2148392375.jpg');
-             
-         }
-         form {
-             margin-left: 80px;
-            
-         }
-         button {
-             width: 73%;
-             height: 30px;
-             color: white;
-             background-color: blue;
-         }
-     
-        
-      </style>
-</head>    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            background-image: url('https://img.freepik.com/premium-vector/abstract-futuristic-purple-background-with-shiny-lines_23-2148392375.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        form {
+            width: 100%;
+            max-width: 400px;
+            background: rgba(0,0,0,0.5);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #646cff;
+            background: rgba(100, 108, 255, 0.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            background: #646cff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #535bf2;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        a {
+            color: #646cff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        @media (max-width: 480px) {
+            form {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            input {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            button {
+                padding: 12px;
+                font-size: 14px;
+            }
+        }
+    </style>
+    
+</head>
 <body>
-    <h2 style="text-align: center">Sign Up</h2>
-   
+    <h2>Sign Up</h2>
     <form>
-        <label for="name"">Full Name:</label><br>
-        <input type="text" name="fullname"
-      id="name"><br>
-        <label for="em">Email:</label><br>
-        <input type="email" name="useremail"
-      id="em"><br>
-        <label for="p1">Password:</label><br>
-        <input type="password" name="password"
-      id="p1"><br>
-        <label for="p2">Confirm Password:</label><br>
-        <input type="password" name="confirmpassword" id="p2"><br>
-       
-        
-        </br>
-        <button type="submit">Sign Up</button><br>
-           
-        <p style="font-size: 13.3px;">Already have an account? <a href="#" style="color: blue;">Sign in</a></p>
-            
+        <label for="name">Full Name:</label>
+        <input type="text" name="fullname" id="name" required>
+
+        <label for="em">Email:</label>
+        <input type="email" name="useremail" id="em" required>
+
+        <label for="p1">Password:</label>
+        <input type="password" name="password" id="p1" required>
+
+        <label for="p2">Confirm Password:</label>
+        <input type="password" name="confirmpassword" id="p2" required>
+
+        <button type="submit">Sign Up</button>
+
+        <p>Already have an account? <a href="#">Sign in</a></p>
     </form>
-</body>     
+</body>
 </html>
