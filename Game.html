@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        nav {
+            background: purple;
+            color: white;
+            height: 55px;
+            font-size: 27px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            font-family: sans-serif;
+        }
+        nav ul {
+            list-style-type: none;
+            margin-left: 100px;
+          
+        }
+        .gameContainer {
+           background: white;
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            position: relative;
+          
+        }
+        .container {
+            display: grid;
+            grid-template-rows: repeat(3,20vw);
+            grid-template-columns: repeat(3,20vw);
+            justify-content: center;
+            align-items: center;
+          
+           
+        }
+        .box {
+            border: 1px solid black;
+            font-size: 6.5vw;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 20vw;
+        }
+        .box:hover {
+            background: lightblue;
+        }
+        
+        .gameinfo {
+            padding: 0 34px;
+            margin-top: 20px;
+            text-align: center;
+            
+        }
+        .imgbox {
+            width: 0;
+            overflow: hidden; 
+            transition: width 1s ease-in-out;
+    }
+        .imgbox.active {
+            width: 300px; 
+          
+    }
+        .line {
+            background: purple;
+            height: 3px;
+            width: 58vw; /* Adjusted */
+            position: absolute;
+            transform-origin: center; 
+            width: 0;
+            overflow: hidden; 
+            transition: width 1s ease-in-out;
+        }
+        .info {
+            font-size: 18px;
+        }
+        .br-0 {
+            border-right: 0;
+        }
+        .bl-0 {
+            border-left: 0;
+        }
+        .bt-0 {
+            border-top: 0;
+        }
+        .bb-0 {
+            border-bottom: 0;
+        }
+        #reset {
+            background: purple;
+            margin: 20px;
+            padding: 10px;
+            width: 30vw;
+            color: white;
+            font-family: sans-serif;
+            font-weight: bold;
+         
+        }
+        @media screen and (max-width=800px){
+            .gamecontainer {
+                flex-wrap: wrap;
+            }
+            .gameinfo {
+                margintop: 34px;
+            }
+            .container {
+                grid-template-rows: repeat(3,20vw);
+                grid-template-columns: repeat(3,20vw);
+            }
+        }
+       
+        
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li>Tic Tac Toe</li>
+        </ul>
+    </nav>
+    <div class="gameContainer">
+        <div class="line"></div>
+        <div class="container">
+            <div class="box bt-0 bl-0"><span class="boxtext"></span></div>
+            <div class="box bt-0"><span class="boxtext"></span></div>
+            <div class="box bt-0 br-0"><span class="boxtext"></span></div>
+            <div class="box bl-0"><span class="boxtext"></span></div>
+            <div class="box"><span class="boxtext"></span></div>
+            <div class="box br-0"><span class="boxtext"></span></div>
+            <div class="box bl-0 bb-0"><span class="boxtext"></span></div>
+            <div class="box bb-0"><span class="boxtext"></span></div>
+            <div class="box br-0 bb-0"><span class="boxtext"></span></div>
+        </div>
+    </div>
+   <div class="gameinfo">
+       <div>
+           <span class="info">Turn for X</span><br>
+           <button id="reset">RESET</button>
+       </div>
+       <div class="imgbox">
+           <img src="https://i.gifer.com/5edn.gif" width="100px">
+       </div>
+   </div>
+</body>
+</html> 
+<script>
+    console.log("Tic Tac Toe");
+    let turn = "X";
+    let isgameover = false;
+    
+    const changeTurn = () => {
+        return turn === "X" ? "O" : "X";
+    }
+
+    const checkWin = () => {
+     let boxtext = document.getElementsByClassName('boxtext');
+     let wins = [
+            [0,1,2, 0, 9, 0],    
+            [3,4,5, 0, 29.5, 0],
+            [6,7,8, 0, 49.5, 0],  
+            [0,3,6, -20, 30, 90], 
+            [1,4,7, 0, 30, 90],  
+            [2,5,8, 20, 30, 90],  
+            [0,4,8, 0, 30, 45],  
+            [2,4,6, 0, 30, -45] 
+     ]
+     wins.forEach(e =>{
+         if((boxtext[e[0]].innerText === boxtext[e[1]].innerText) && (boxtext[e[2]].innerText === boxtext[e[1]].innerText) && (boxtext[e[0]].innerText !== "") ){
+         document.querySelector('.info').innerText =    
+ boxtext[e[0]].innerText +  '-Won'
+    isgameover= true
+     document.querySelector('.imgbox').classList.add('active')
+      let line = document.querySelector('.line');
+      line.style.width = (e[5] === 90 || e[5] === -45 ? '58vw' : '58vw');
+       line.style.transform = `translate(${e[3]}vw, ${e[4]}vw) rotate(${e[5]}deg)`;
+       }
+    })
+  }
+
+    let boxes = document.getElementsByClassName("box"); 
+    Array.from(boxes).forEach(element => {
+        let boxtext = element.querySelector('.boxtext');
+        element.addEventListener('click', () => { 
+            if(boxtext.innerText === '' && !isgameover) {
+                boxtext.innerText = turn;
+                turn = changeTurn();
+                checkWin();
+                if(!isgameover) {
+                                            document.getElementsByClassName("info")[0].innerText = "Turn for " + turn;
+              }
+            }    
+        })
+    })
+    
+   reset.addEventListener('click', () => {
+    let boxtexts = document.querySelectorAll('.boxtext');
+    Array.from(boxtexts).forEach(element => {
+        element.innerText = "";
+    });
+    turn = "X";
+    isgameover = false;
+    let line = document.querySelector('.line');
+    line.style.width = '0';
+    line.style.transform = ''
+    document.getElementsByClassName("info")[0].innerText = "Turn for " + turn;
+    document.querySelector('.imgbox').classList.remove('active'); 
+});    
+</script>
